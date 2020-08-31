@@ -1,0 +1,88 @@
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.BeforeMethod;
+
+import io.appium.java_client.android.AndroidDriver;
+
+public class SampleTest {
+	public WebDriver driver;
+
+    //public WebDriverWait wait;
+
+	 DesiredCapabilities caps = new DesiredCapabilities();
+	 @BeforeMethod
+	 public void setup () throws MalformedURLException {
+	        DesiredCapabilities caps = new DesiredCapabilities();
+	        caps.setCapability("no",true);
+	        caps.setCapability("deviceName", "Test");
+	        caps.setCapability("udid", "emulator-5554"); 
+	        caps.setCapability("platformName", "Android");
+	        caps.setCapability("platformVersion", "8.1.0");
+	        caps.setCapability("skipUnlock","true");
+	        caps.setCapability("appPackage", "com.android.calculator2");
+	        caps.setCapability("appActivity","com.android.calculator2.Calculator");
+	        caps.setCapability("appActivity","com.telstra.android.myt.main.MainActivity");
+	        caps.setCapability("noReset","false");
+	        URL url = new URL("http://127.0.0.1:4723/wd/hub");
+
+	        AndroidDriver driver = new AndroidDriver(url, caps);
+
+	        Thread.sleep(5000);
+
+	        // add two numbers
+	        WebElement seven = driver.findElementById("com.android.calculator2:id/digit_7");
+	        seven.click();
+	        WebElement plus = driver.findElementById("com.android.calculator2:id/op_add");
+	        plus.click();
+	        WebElement three = driver.findElementById("com.android.calculator2:id/digit_3");
+	        three.click();
+	        WebElement equalTo = driver.findElementById("com.android.calculator2:id/eq");
+	        equalTo.click();
+
+	        //subtract two numbers
+	        WebElement five = driver.findElementById("com.android.calculator2:id/digit_5");
+	        five.click();
+	        WebElement minus = driver.findElementById("com.android.calculator2:id/op_sub");
+	        plus.click();
+	        WebElement two = driver.findElementById("com.android.calculator2:id/digit_2");
+	        two.click();
+	        equalTo.click();
+	        
+	        //multiply two numbers
+	        
+	        seven.click();
+	        WebElement multiply = driver.findElementById("com.android.calculator2:id/op_mul");
+	        multiply.click();	       
+	        three.click();
+	        equalTo.click();
+	        
+	        //Divide two numbers
+	        WebElement four = driver.findElementById("com.android.calculator2:id/digit_4");
+	        four.click();
+	        WebElement divide = driver.findElementById("com.android.calculator2:id/op_div");
+	        divide.click();
+	        two.click();
+	        equalTo.click();
+	        // locate the edit box
+	        WebElement results = driver.findElementById("com.android.calculator2:id/formula");
+
+	        if(results.getText().equals("10"))
+	        {
+	            System.out.println("Test Passed...");
+	        }
+	        else
+	        {
+	            System.out.println("Test Failed...");
+	        }
+	    }
+	        
+	    }
+
+   
+
+
+    
